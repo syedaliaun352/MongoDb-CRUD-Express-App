@@ -1,0 +1,33 @@
+{
+  "name": "mongodb-crud-express-app",
+  "version": "1.0.0",
+  "description": "simple MongoDb CRUD App",
+  "keywords": [
+    "api",
+    "mongodb",
+    "express",
+    "crud"
+  ],
+  "license": "MIT",
+  "author": "Syed Ali Aun",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
