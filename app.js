@@ -3,6 +3,9 @@ import dotenv from 'dotenv'
 import helmet from 'helmet';
 import compression from 'compression';
 import cors from 'cors'
+import { errorHandler } from './middleware/errorHandler.js';
+import { usersRouter } from './routes/usersRoute.js';
+import { connectToDb } from './db.js';
 
 dotenv.config()
 const app = express();
@@ -17,16 +20,14 @@ app.get('/v1/status', (req, res) => {
     res.status(200).json({ Message: "API is Running" })
 })
 
+app.use("/v1/users", usersRouter)
+
 
 app.all("/*splat", (req, res) => {
     res.status(404).json({ Message: `Route with ${req.url} Not Found` })
 })
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: err.message || 'Something went wrong!' });
-});
-
+app.use(errorHandler)
 app.listen(port, () => {
     console.log(`API Running on port: ${port}`);
 
