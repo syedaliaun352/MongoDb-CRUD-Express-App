@@ -5,7 +5,6 @@ import compression from 'compression';
 import cors from 'cors'
 import { errorHandler } from './middleware/errorHandler.js';
 import { usersRouter } from './routes/usersRoute.js';
-import { connectToDb } from './db.js';
 
 dotenv.config()
 const app = express();
@@ -17,14 +16,14 @@ app.use(compression());
 app.use(cors()) // not needed in production
 
 app.get('/v1/status', (req, res) => {
-    res.status(200).json({ Message: "API is Running" })
+    res.status(200).json({ message: "API is Running" })
 })
 
 app.use("/v1/users", usersRouter)
 
 
 app.all("/*splat", (req, res) => {
-    res.status(404).json({ Message: `Route with ${req.url} Not Found` })
+    res.status(404).json({ message: `Route with ${req.url} Not Found` })
 })
 
 app.use(errorHandler)
