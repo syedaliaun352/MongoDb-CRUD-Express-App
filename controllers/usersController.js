@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 const getUsers = async (req, res) => {
     try {
         await connectToDb()
-        const getUsersList = await userModel.find({}, { password: 0 }).sort({ createdAt: -1 })
+        const getUsersList = await userModel.find({}, { userPassword: 0 }).sort({ createdAt: -1 })
         res.status(200).json({
             success: true,
             users: getUsersList
@@ -18,8 +18,8 @@ const getUsers = async (req, res) => {
 }
 
 const createUsers = async (req, res) => {
-    const { username, email, password } = req.body
-    if (!username || !email || !password) {
+    const { userName, userEmail, userPassword } = req.body
+    if (!userName || !userEmail || !userPassword) {
         return res.status(400).json({
             success: false,
             message: "all fields are reqiured"
@@ -27,22 +27,26 @@ const createUsers = async (req, res) => {
     }
     try {
         await connectToDb();
-        const existingUser = await userModel.findOne({ email });
+        const existingUser = await userModel.findOne({ userEmail });
         if (existingUser) {
             return res.status(409).json({
                 success: false,
                 message: "Email already in use"
             });
         }
-        const hashedPassword = await bcrypt.hash(password, 10)
-        const newUser = await userModel.create({ username, email, password: hashedPassword })
+        const hashedPassword = await bcrypt.hash(userPassword, 10)
+        const newUser = await userModel.create({
+            username: userName,
+            email: userEmail,
+            password: hashedPassword
+        })
         if (newUser) {
             return res.status(201).json({
                 success: true,
                 message: "User Created",
                 data: {
-                    username: newUser.username,
-                    email: newUser.email,
+                    userName: newUser.userName,
+                    userEmail: newUser.userEmail,
                 }
             })
         }
