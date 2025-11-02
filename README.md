@@ -8,6 +8,5 @@ MongoDB connection using Mongoose
 Environment variables via dotenv
 Secure HTTP headers with Helmet
 Response compression for better performance
-CORS enabled
 User model with validation and timestamps
 Ready structure for JWT authentication
