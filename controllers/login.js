@@ -37,7 +37,7 @@ const userLogin = async (req, res) => {
         const token = jwt.sign(
             { id: checkLogin._id },
             process.env.JWT_KEY,
-            { expiresIn: "30m" }
+            { expiresIn: "120m" }
         );
 
         res.status(200).json({

@@ -23,7 +23,7 @@ app.use("/v1/users", usersRouter)
 
 
 app.all("/*splat", (req, res) => {
-    res.status(404).json({ message: `Route with ${req.url} Not Found` })
+    res.status(404).json({ message: `Route Not Found` })
 })
 
 app.use(errorHandler)
