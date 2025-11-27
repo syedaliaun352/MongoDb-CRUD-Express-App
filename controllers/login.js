@@ -2,8 +2,6 @@ import { connectToDb } from "../db.js";
 import { userModel } from "../model/Users.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-dotenv.config();
 
 const userLogin = async (req, res) => {
     const { userEmail, userPassword } = req.body;

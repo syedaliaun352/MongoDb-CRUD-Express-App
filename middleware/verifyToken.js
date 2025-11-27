@@ -1,6 +1,4 @@
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-dotenv.config();
 
 export const verifyToken = (req, res, next) => {
     const authHeader = req.headers["authorization"];
@@ -19,6 +17,7 @@ export const verifyToken = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (error) {
+        console.log(error);
         return res.status(403).json({
             success: false,
             message: "Invalid or expired token.",

@@ -13,7 +13,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json())
 app.use(helmet());
 app.use(compression());
-app.use(cors()) // not needed in production
+app.use(cors({
+    origin: "*",
+    credentials: true
+}))
 
 app.get('/v1/status', (req, res) => {
     res.status(200).json({ message: "API is Running" })
