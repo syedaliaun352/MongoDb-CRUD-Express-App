@@ -11,7 +11,6 @@ const getUsers = async (req, res) => {
             users: getUsersList,
         });
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };
@@ -54,7 +53,6 @@ const createUsers = async (req, res) => {
             },
         });
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };
